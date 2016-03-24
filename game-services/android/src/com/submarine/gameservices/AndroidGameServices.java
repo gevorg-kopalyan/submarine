@@ -33,7 +33,6 @@ import com.submarine.gameservices.quests.QuestConstants;
 import com.submarine.gameservices.quests.QuestRewardListener;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 
 public class AndroidGameServices implements GameHelper.GameHelperListener, GameServices {
     // Client request flags
@@ -129,7 +128,7 @@ public class AndroidGameServices implements GameHelper.GameHelperListener, GameS
 
     public void onActivityResult(int request, int response, Intent data) {
         gameHelper.onActivityResult(request, response, data);
-        if (response == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED && gameHelper.isSignedIn()) {
+        if (response == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
             gameHelper.disconnect();
             setSignInCancelationssToMax();
         }
