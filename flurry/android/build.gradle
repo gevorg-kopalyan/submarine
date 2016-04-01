@@ -6,11 +6,6 @@ configurations { natives
 dependencies {
     compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
     compile "com.flurry.android:analytics:$flurryVersion"
-    compile "com.google.android.gms:play-services:$gms_library_version"
-    compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
-    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
-    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
-    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
 }
 
 android {

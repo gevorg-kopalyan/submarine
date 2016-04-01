@@ -41,7 +41,7 @@ allprojects {
             support_library_version = '20.0.+'
         }
         if (!project.hasProperty('gms_library_version')) {
-            gms_library_version = '8.4.0'
+            gms_library_version = '8.+'
         }
         //-------End BasicSamples----------//
 

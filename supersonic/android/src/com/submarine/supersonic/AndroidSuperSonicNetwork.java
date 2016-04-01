@@ -76,6 +76,7 @@ public class AndroidSuperSonicNetwork implements SuperSonicNetwork {
             uuid = UUID.randomUUID().toString() + Long.toHexString(System.currentTimeMillis());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(UUID_KEY, uuid);
+            editor.commit();
         }
         return uuid;
     }
