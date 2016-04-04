@@ -110,12 +110,18 @@ public class SuperSonicRewardedVideoManager implements SuperSonicRewardedVideo{
     }
 
     private void startNetworkMonitor() {
+        if(listener != null){
+            return;
+        }
         listener = new NetworkConnectivityListener();
         listener.addListener(new NetworkConnectivityListener.ConnectivityChangeListener() {
             @Override
             public void onConnectivityChanged(NetworkConnectivityListener.State mState) {
                 if(mState.equals(NetworkConnectivityListener.State.CONNECTED)){
                     mMediationAgent.initRewardedVideo(activity, mAppKey, mUserId);
+                    if(listener == null){
+                        return;
+                    }
                     listener.removeListener();
                     listener.stopListening();
                     listener = null;
