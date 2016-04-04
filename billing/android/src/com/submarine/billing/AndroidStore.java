@@ -2,6 +2,7 @@ package com.submarine.billing;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.SkuDetails;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -157,19 +158,32 @@ public class AndroidStore implements Store {
             if (billingProcessor == null) {
                 return;
             }
-            for (String productId : productIds) {
-                SkuDetails skuDetails = billingProcessor.getPurchaseListingDetails(productId);
-                if (skuDetails != null) {
-                    Product product = new Product();
-                    product.currency = skuDetails.currency;
-                    product.price = skuDetails.priceValue.floatValue();
-                    product.id = productId;
-                    products.put(product.id, product);
+
+            AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+
+                @Override
+                protected String doInBackground(String... params) {
+                    for (String productId : productIds) {
+                        SkuDetails skuDetails = billingProcessor.getPurchaseListingDetails(productId);
+                        if (skuDetails != null) {
+                            Product product = new Product();
+                            product.currency = skuDetails.currency;
+                            product.price = skuDetails.priceValue.floatValue();
+                            product.id = productId;
+                            products.put(product.id, product);
+                        }
+                    }
+                    return null;
                 }
-            }
-            for (StoreListener storeListener : storeListeners) {
-                storeListener.productsReceived();
-            }
+
+                @Override
+                protected void onPostExecute(String s) {
+                    for (StoreListener storeListener : storeListeners) {
+                        storeListener.productsReceived();
+                    }
+                }
+
+            };
         }
 
     }
