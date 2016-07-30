@@ -7,10 +7,12 @@ configurations {
 }
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: '*.jar') //TODO make provided the jar
-    compile 'com.supersonic.sdk:mediationsdk:6.4.7@jar'
+    compile 'com.fyber:fyber-sdk:8.3.0'
     compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
+    //compile project(':submarine-core')
 	compile "com.google.android.gms:play-services-ads:$gms_library_version"
+   /* compile 'com.fyber:fyber-annotations:1.1.0'
+    compile 'com.fyber:fyber-annotations-compiler:1.2.0'*/
 }
 
 android {
@@ -52,7 +54,7 @@ eclipse {
     }
 
     project {
-        name = "submarine-supersonic-android"
+        name = "submarine-fyber-android"
         natures 'com.android.ide.eclipse.adt.AndroidNature'
         buildCommands.clear();
         buildCommand "com.android.ide.eclipse.adt.ResourceManagerBuilder"
@@ -88,9 +90,9 @@ idea {
 
 ext {
     VERSION_NAME = SUPERSONIC_VERSION
-    POM_ARTIFACT_ID = 'supersonic-android'
+    POM_ARTIFACT_ID = 'fyber-android'
 
-    POM_NAME = 'supersonic-android'
+    POM_NAME = 'fyber-android'
     POM_PACKAGING = 'aar'
-    POM_DESCRIPTION = 'Core functionality for supersonic android'
+    POM_DESCRIPTION = 'Core functionality for fyber android'
 }

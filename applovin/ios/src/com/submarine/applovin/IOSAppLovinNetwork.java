@@ -1,14 +1,16 @@
-package com.submarine.supersonic;
+package com.submarine.applovin;
+
+import com.submarine.supersonic.*;
 
 /**
  * Created by Gev on 2/6/15.
  */
-public class IOSSuperSonicNetwork implements SuperSonicNetwork {
+public class IOSAppLovinNetwork implements SuperSonicNetwork {
 
     private SuperSonicInterstitial interstitialManager;
     private SuperSonicRewardedVideo rewardedVideoManager;
 
-    public IOSSuperSonicNetwork() {
+    public IOSAppLovinNetwork() {
         initInterstitialManager();
         initRewardedVideoManager();
     }

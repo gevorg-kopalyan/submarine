@@ -7,10 +7,9 @@ configurations {
 }
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: '*.jar') //TODO make provided the jar
-    compile 'com.supersonic.sdk:mediationsdk:6.4.7@jar'
+    compile fileTree(dir: 'libs', include: '*.jar')
     compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
-	compile "com.google.android.gms:play-services-ads:$gms_library_version"
+	//compile "com.google.android.gms:play-services-ads:$gms_library_version"
 }
 
 android {
@@ -52,7 +51,7 @@ eclipse {
     }
 
     project {
-        name = "submarine-supersonic-android"
+        name = "submarine-applovin-android"
         natures 'com.android.ide.eclipse.adt.AndroidNature'
         buildCommands.clear();
         buildCommand "com.android.ide.eclipse.adt.ResourceManagerBuilder"
@@ -87,10 +86,10 @@ idea {
 }
 
 ext {
-    VERSION_NAME = SUPERSONIC_VERSION
-    POM_ARTIFACT_ID = 'supersonic-android'
+    VERSION_NAME = APPLOVIN_VERSION
+    POM_ARTIFACT_ID = 'applovin-android'
 
-    POM_NAME = 'supersonic-android'
+    POM_NAME = 'applovin-android'
     POM_PACKAGING = 'aar'
-    POM_DESCRIPTION = 'Core functionality for supersonic android'
+    POM_DESCRIPTION = 'Core functionality for applovin android'
 }

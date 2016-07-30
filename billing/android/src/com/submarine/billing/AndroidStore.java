@@ -6,11 +6,11 @@ import android.os.AsyncTask;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.SkuDetails;
 import com.anjlab.android.iab.v3.TransactionDetails;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.submarine.billing.product.Product;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -121,7 +121,7 @@ public class AndroidStore implements Store {
         @Override
         public void onProductPurchased(String s, TransactionDetails transactionDetails) {
 
-            Gdx.app.log(TAG, "onProductPurchased : " + transactionDetails.orderId + ", " + transactionDetails.purchaseInfo.responseData);
+            //Gdx.app.log(TAG, "onProductPurchased : " + transactionDetails.orderId + ", " + transactionDetails.purchaseInfo.responseData);
 
             for (StoreListener storeListener : storeListeners) {
                 storeListener.transactionCompleted(transactionDetails.productId);
@@ -130,10 +130,12 @@ public class AndroidStore implements Store {
 
         @Override
         public void onPurchaseHistoryRestored() {
-            //Gdx.app.log(TAG, "onPurchaseHistoryRestored");
+           // Gdx.app.log(TAG, "onPurchaseHistoryRestored");
             for (String productId : productIds) {
                 TransactionDetails transactionDetails = billingProcessor.getPurchaseTransactionDetails(productId);
+                //Gdx.app.log(TAG, "onPurchaseHistoryRestored productId " + productId);
                 if (transactionDetails != null) {
+                    //Gdx.app.log(TAG, "onPurchaseHistoryRestored transactionDetails " + transactionDetails.productId);
                     for (StoreListener storeListener : storeListeners) {
                         storeListener.transactionRestored(productId);
                     }
@@ -154,7 +156,7 @@ public class AndroidStore implements Store {
 
         @Override
         public void onBillingInitialized() {
-            //Gdx.app.log(TAG, "onBillingInitialized");
+           // Gdx.app.log(TAG, "onBillingInitialized");
             if (billingProcessor == null) {
                 return;
             }
@@ -163,9 +165,12 @@ public class AndroidStore implements Store {
 
                 @Override
                 protected String doInBackground(String... params) {
-                    for (String productId : productIds) {
+                    //Gdx.app.log(TAG, "onBillingInitialized doInBackground");
+                    for (String productId : params) {
                         SkuDetails skuDetails = billingProcessor.getPurchaseListingDetails(productId);
+                       // Gdx.app.log(TAG, "onBillingInitialized doInBackground get productId " + productId);
                         if (skuDetails != null) {
+                           // Gdx.app.log(TAG, "onBillingInitialized doInBackground skuDetails " + skuDetails.toString());
                             Product product = new Product();
                             product.currency = skuDetails.currency;
                             product.price = skuDetails.priceValue.floatValue();
@@ -178,12 +183,31 @@ public class AndroidStore implements Store {
 
                 @Override
                 protected void onPostExecute(String s) {
+                    //Gdx.app.log(TAG, "onBillingInitialized onPostExecute");
+                    //Gdx.app.log(TAG, "onBillingInitialized onPostExecute skuDetails " + toString());
                     for (StoreListener storeListener : storeListeners) {
                         storeListener.productsReceived();
                     }
                 }
 
-            };
+                public String toString() {
+                    StringBuilder sb = new StringBuilder();
+                    Iterator<Map.Entry<String, Product>> iter = products.entrySet().iterator();
+                    while (iter.hasNext()) {
+                        Map.Entry<String, Product> entry = iter.next();
+                        sb.append(entry.getKey());
+                        sb.append('=').append('"');
+                        sb.append(entry.getValue().id);
+                        sb.append('"');
+                        if (iter.hasNext()) {
+                            sb.append(',').append(' ');
+                        }
+                    }
+                    return sb.toString();
+
+                }
+
+            }.execute(productIds);
         }
 
     }

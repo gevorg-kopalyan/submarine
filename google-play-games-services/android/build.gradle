@@ -2,33 +2,52 @@ apply plugin: "android-library"
 
 configurations {
     natives
-    provided
-    provided.extendsFrom(compile)
+   /* provided
+    provided.extendsFrom(compile)*/
 }
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: '*.jar') //TODO make provided the jar
-    compile 'com.supersonic.sdk:mediationsdk:6.4.7@jar'
     compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
-	compile "com.google.android.gms:play-services-ads:$gms_library_version"
+    if (!project.hasProperty('appcompat_library_version')) {
+        ext.appcompat_library_version = '23.+'
+    }
+    if (!project.hasProperty('support_library_version')) {
+        ext.support_library_version = '23.+'
+    }
+    if (!project.hasProperty('gms_library_version')) {
+        ext.gms_library_version = '9.+'
+    }
+    compile "com.android.support:appcompat-v7:${appcompat_library_version}"
+    compile "com.android.support:support-v4:${support_library_version}"
+    compile "com.google.android.gms:play-services-games:${gms_library_version}"
+    compile "com.google.android.gms:play-services-plus:${gms_library_version}"
+    compile "com.google.android.gms:play-services-auth:$gms_library_version"
 }
 
 android {
-    compileSdkVersion android_compile_version
     buildToolsVersion android_version
+    compileSdkVersion android_compile_version
     sourceSets {
         main {
+            //compileClasspath += [configurations.provided]
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             aidl.srcDirs = ['src']
             renderscript.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
+            //compileClasspath += [configurations.provided]
         }
 
-        instrumentTest.setRoot('tests')
     }
 }
+/*sourceSets {
+    main { compileClasspath += [configurations.provided] }
+}*/
+//idea.module.scopes.PROVIDED.plus += configurations.provided
+//eclipse.classpath.plusConfigurations += configurations.provided
+
+//project.sourceSets.main.compileClasspath += project.configurations.provided
 
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {
@@ -37,6 +56,7 @@ eclipse {
     sourceSets {
         main {
             java.srcDirs "src", 'gen'
+            compileClasspath += configurations.provided
         }
     }
 
@@ -52,7 +72,7 @@ eclipse {
     }
 
     project {
-        name = "submarine-supersonic-android"
+        name = "submarine-google-play-game-services-android"
         natures 'com.android.ide.eclipse.adt.AndroidNature'
         buildCommands.clear();
         buildCommand "com.android.ide.eclipse.adt.ResourceManagerBuilder"
@@ -67,7 +87,7 @@ idea {
     module {
         sourceDirs += file("src");
         scopes = [COMPILE: [plus: [project.configurations.compile]]]
-        scopes += [PROVIDED: [plus: [configurations.provided]]]
+        //scopes += [PROVIDED: [plus: [configurations.provided]]]
 
         iml {
             withXml {
@@ -87,10 +107,12 @@ idea {
 }
 
 ext {
-    VERSION_NAME = SUPERSONIC_VERSION
-    POM_ARTIFACT_ID = 'supersonic-android'
+    VERSION_NAME = GAME_SERVICES_VERSION
+    POM_ARTIFACT_ID = 'google-play-game-services-android'
 
-    POM_NAME = 'supersonic-android'
+    POM_NAME = 'google-play-game-services-android'
     POM_PACKAGING = 'aar'
-    POM_DESCRIPTION = 'Core functionality for supersonic android'
+    POM_DESCRIPTION = 'Core functionality for android game-services'
 }
+
+

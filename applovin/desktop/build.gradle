@@ -1,0 +1,26 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+
+dependencies {
+    compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
+    //compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    //compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+}
+
+eclipse.project {
+    name = "submarine-applovin-desktop"
+}
+
+ext {
+    VERSION_NAME = APPLOVIN_VERSION
+    POM_ARTIFACT_ID = 'applovin-desktop'
+
+    POM_NAME = 'applovin-desktop'
+    POM_PACKAGING = 'jar'
+    POM_DESCRIPTION = 'Core functionality for applovin desktop'
+}

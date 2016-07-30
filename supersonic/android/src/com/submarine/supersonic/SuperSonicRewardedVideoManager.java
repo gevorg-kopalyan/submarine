@@ -3,7 +3,7 @@ package com.submarine.supersonic;
 import android.app.Activity;
 import com.submarine.supersonic.utils.NetworkConnectivityListener;
 import com.supersonic.mediationsdk.logger.SupersonicError;
-import com.supersonic.mediationsdk.model.RewardedVideoPlacement;
+import com.supersonic.mediationsdk.model.Placement;
 import com.supersonic.mediationsdk.sdk.RewardedVideoListener;
 import com.supersonic.mediationsdk.sdk.Supersonic;
 
@@ -77,9 +77,9 @@ public class SuperSonicRewardedVideoManager implements SuperSonicRewardedVideo{
         }
 
         @Override
-        public void onRewardedVideoAdRewarded(RewardedVideoPlacement rewardedVideoPlacement) {
+        public void onRewardedVideoAdRewarded(Placement placement) {
             if(rewardedVideoListener == null) return;
-            rewardedVideoListener.onRewardedVideoAdRewarded(rewardedVideoPlacement.getPlacementName());
+            rewardedVideoListener.onRewardedVideoAdRewarded(placement.getPlacementName());
         }
 
         @Override

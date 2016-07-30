@@ -1,14 +1,16 @@
-package com.submarine.supersonic;
+package com.submarine.applovin;
+
+import com.submarine.supersonic.*;
 
 /**
  * Created by Gev on 1/30/15.
  */
-public class DesktopSuperSonicNetwork implements SuperSonicNetwork{
+public class DesktopAppLovinNetwork implements SuperSonicNetwork {
 
  private SuperSonicInterstitial interstitialManager;
  private SuperSonicRewardedVideo rewardedVideoManager;
 
-    public DesktopSuperSonicNetwork() {
+    public DesktopAppLovinNetwork() {
         initInterstitialManager();
         initRewardedVideoManager();
     }
