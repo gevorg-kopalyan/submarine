@@ -1,4 +1,4 @@
-/*include 'submarine-admob-android', 'submarine-admob-ios', 'submarine-admob-desktop' //, 'submarine-admob-core'
+include 'submarine-admob-android', 'submarine-admob-ios', 'submarine-admob-desktop' //, 'submarine-admob-core'
 
 project(':submarine-admob-android').projectDir = new File(settingsDir, 'admob/android')
 project(':submarine-admob-ios').projectDir = new File(settingsDir, 'admob/ios')
@@ -54,34 +54,16 @@ project(':submarine-supersonic-android').projectDir = new File(settingsDir, 'sup
 project(':submarine-supersonic-desktop').projectDir = new File(settingsDir, 'supersonic/desktop')
 project(':submarine-supersonic-ios').projectDir = new File(settingsDir, 'supersonic/ios')
 
-include 'submarine-applovin-android', 'submarine-applovin-desktop', 'submarine-applovin-ios'
-
-project(':submarine-applovin-android').projectDir = new File(settingsDir, 'applovin/android')
-project(':submarine-applovin-desktop').projectDir = new File(settingsDir, 'applovin/desktop')
-project(':submarine-applovin-ios').projectDir = new File(settingsDir, 'applovin/ios')
-
-include 'submarine-fyber-android', 'submarine-fyber-desktop', 'submarine-fyber-ios'
-
-project(':submarine-fyber-android').projectDir = new File(settingsDir, 'fyber/android')
-project(':submarine-fyber-desktop').projectDir = new File(settingsDir, 'fyber/desktop')
-project(':submarine-fyber-ios').projectDir = new File(settingsDir, 'fyber/ios')*/
-
-include 'submarine-google-play-game-services-android', 'submarine-google-play-game-services-ios', 'submarine-google-play-game-services-desktop' //, 'submarine-game-services-core'
-
-project(':submarine-google-play-game-services-android').projectDir = new File(settingsDir, 'google-play-games-services/android')
-project(':submarine-google-play-game-services-ios').projectDir = new File(settingsDir, 'google-play-games-services/ios')
-project(':submarine-google-play-game-services-desktop').projectDir = new File(settingsDir, 'google-play-games-services/desktop')
-//project(':submarine-game-services-core').projectDir = new File(settingsDir, 'game-services/core')
 
 include 'submarine-core'
 
 project(':submarine-core').projectDir = new File(settingsDir, 'core')
 
 
-/*// Test Application for Submarine
+// Test Application for Submarine
 include 'submarine-testapp-desktop', 'submarine-testapp-android', 'submarine-testapp-ios', 'submarine-testapp-core'
 
 project(':submarine-testapp-android').projectDir = new File(settingsDir, 'test-app/android')
 project(':submarine-testapp-ios').projectDir = new File(settingsDir, 'test-app/ios')
 project(':submarine-testapp-desktop').projectDir = new File(settingsDir, 'test-app/desktop')
-project(':submarine-testapp-core').projectDir = new File(settingsDir, 'test-app/core')*/
+project(':submarine-testapp-core').projectDir = new File(settingsDir, 'test-app/core')

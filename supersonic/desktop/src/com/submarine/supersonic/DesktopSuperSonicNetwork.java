@@ -1,7 +1,7 @@
 package com.submarine.supersonic;
 
 /**
- * Created by Gev on 1/30/15.
+ * Created by sargis on 1/30/15.
  */
 public class DesktopSuperSonicNetwork implements SuperSonicNetwork{
 

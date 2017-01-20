@@ -8,7 +8,7 @@ configurations {
 
 dependencies {
     //compile fileTree(dir: 'libs', include: '*.jar') //TODO make provided the jar
-    compile 'com.supersonic.sdk:mediationsdk:6.4.7@jar'
+    compile files('libs/mediationsdk-6.4.0.jar')
     compile "com.underwaterapps.submarine:core:$CORE_VERSION", { changing = true }
 	compile "com.google.android.gms:play-services-ads:$gms_library_version"
 }

@@ -1,7 +1,7 @@
 package com.submarine.supersonic;
 
 /**
- * Created by Gev on 2/6/15.
+ * Created by sargis on 2/6/15.
  */
 public class IOSSuperSonicNetwork implements SuperSonicNetwork {
 

@@ -4,10 +4,9 @@ buildscript {
         jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.0'
 		classpath 'org.robovm:robovm-gradle-plugin:1.8.0'
     }
 }
@@ -32,17 +31,17 @@ allprojects {
 
         //-------BasicSamples----------//
         android_compile_version = 23
-        android_version = '24'
+        android_version = '23.0.2'
         android_min_sdk_version = 9
 
         if (!project.hasProperty('appcompat_library_version')) {
-            appcompat_library_version = '23.+'
+            appcompat_library_version = '20.0.+'
         }
         if (!project.hasProperty('support_library_version')) {
-            support_library_version = '23.+'
+            support_library_version = '20.0.+'
         }
         if (!project.hasProperty('gms_library_version')) {
-            gms_library_version = '9.+'
+            gms_library_version = '8.+'
         }
         //-------End BasicSamples----------//
 
@@ -75,7 +74,6 @@ allprojects {
         STATS_REPORTER_VERSION = '1.0.0'
         FLURRY_VERSION = '1.0.0'
         SUPERSONIC_VERSION = '1.0.0'
-        APPLOVIN_VERSION = '1.0.0'
 
         if(!IS_RELEASE){
             ADCOLONY_VERSION += "-SNAPSHOT"
@@ -86,7 +84,6 @@ allprojects {
             STATS_REPORTER_VERSION += "-SNAPSHOT"
             FLURRY_VERSION += "-SNAPSHOT"
             SUPERSONIC_VERSION += "-SNAPSHOT"
-            APPLOVIN_VERSION += "-SNAPSHOT"
         }
         //-----All sub project versions end----//
     }
@@ -96,11 +93,6 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-        maven {
-            name "Fyber's maven repo"
-            url "https://fyber.bintray.com/maven"
-        }
-        maven { url "https://dl.bintray.com/supersonic/android-sdk" }
     }
 
     configurations.all {
@@ -109,14 +101,12 @@ allprojects {
     }
 }
 
-/*configure(subprojects.findAll {(it.name != 'BaseGameUtils' &&
+configure(subprojects.findAll {(it.name != 'BaseGameUtils' &&
                                 (it.name == 'submarine-billing-android' || it.name == 'submarine-billing-desktop' || it.name == 'submarine-billing-ios'
                                 || it.name == 'submarine-game-services-android' || it.name == 'submarine-game-services-desktop' || it.name == 'submarine-game-services-ios'
                                 || it.name == 'submarine-admob-android' || it.name == 'submarine-admob-desktop' || it.name == 'submarine-admob-ios'
                                 || it.name == 'submarine-flurry-android' || it.name == 'submarine-flurry-desktop' || it.name == 'submarine-flurry-ios'
                                 || it.name == 'submarine-supersonic-android' || it.name == 'submarine-supersonic-desktop' || it.name == 'submarine-supersonic-ios'
-                                || it.name == 'submarine-fyber-android' || it.name == 'submarine-fyber-desktop' || it.name == 'submarine-fyber-ios'
-                                || it.name == 'submarine-google-play-game-services-android' || it.name == 'submarine-google-play-game-services-desktop' || it.name == 'submarine-google-play-game-services-ios'
                                 || it.name == 'submarine-core'))}) {
 
     apply from : (rootProject.getRootDir().path+'/publish.gradle')
@@ -146,28 +136,9 @@ task uploadSuperSonicArchives(dependsOn: [':submarine-supersonic-android:uploadA
     println "Uploading Submarine SuperSonic Archives."
 }
 
-task uploadFyberArchives(dependsOn: [':submarine-fyber-android:uploadArchives', ':submarine-fyber-desktop:uploadArchives', ':submarine-fyber-ios:uploadArchives']){
-    println "Uploading Submarine Fyber Archives."
-}
 
-task uploadGPGSArchives(dependsOn: [':submarine-google-play-game-services-android:uploadArchives', ':submarine-google-play-game-services-desktop:uploadArchives', ':submarine-google-play-game-services-ios:uploadArchives']){
-    println "Uploading Submarine Fyber Archives."
-}
-
-task clean(type: Delete) {
-    delete 'build'
-}
-
-*/
-
-configure(subprojects.findAll {(it.name == 'submarine-google-play-game-services-android' || it.name == 'submarine-google-play-game-services-desktop' || it.name == 'submarine-google-play-game-services-ios'
-                                || it.name == 'submarine-core')}) {
-
-    apply from : (rootProject.getRootDir().path+'/publish.gradle')
-}
-
-task uploadGPGSArchives(dependsOn: [':submarine-google-play-game-services-android:uploadArchives', ':submarine-google-play-game-services-desktop:uploadArchives', ':submarine-google-play-game-services-ios:uploadArchives']){
-    println "Uploading Submarine Fyber Archives."
+tasks.eclipse.doLast {
+    delete ".project"
 }
 
 def getLocalProperties() {
